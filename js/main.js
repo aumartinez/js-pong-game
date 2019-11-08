@@ -19,19 +19,24 @@ function run() {
   //Ball
   let ballRad = 8;
   
-  //Canvas redraw
-  let time = 10;
-  let canvasDraw = setInterval(draw, time);
-  
   //User paddle  
   let paddW = 10;
   let paddH = 50;
+  
   let userX = 0;
   let userY = (canvas.height / 2) - (paddH / 2);
   
-  //PC padde  
+  //PC paddle  
   let pcX = canvas.width - paddW;
   let pcY = userY;
+  
+  //Listeners
+  document.addEventListener("keydown", keyDownFn, false);
+  document.addEventListener("keyup", keyUpFn, false);
+  
+  //Canvas redraw
+  let time = 10;
+  let canvasDraw = setInterval(draw, time);
   
   function draw() {
     
@@ -74,6 +79,21 @@ function run() {
     ctx.fillStyle = "#000";
     ctx.fill();
     ctx.closePath();
+  }
+  
+  function keyDownFn(evt) {
+    switch (evt.keyCode) {
+      case 38: //up arrow
+      upKey = true;
+      break;
+      
+      case 40: //down arrow
+      downKey = true;
+      break;
+      
+      default:
+      return false;
+    }
   }
   
 } //End run
