@@ -16,10 +16,13 @@ function run() {
   
   //Ball
   let ballRad = 8;
+  let ballHit = false;
   
   //User paddle  
   let paddW = 10;
   let paddH = 50;
+  
+  let paddHit = false;
   
   let userX = 0;
   let userY = (canvas.height / 2) - (paddH / 2);
@@ -76,13 +79,13 @@ function run() {
     }
     
     //Draw objects
-    drawBall();
-    drawPadd(userX, userY, paddW, paddH);
-    drawPadd(pcX, pcY, paddW, paddH);
+    drawBall(ballHit);
+    drawPadd(userX, userY, paddW, paddH, paddHit);
+    drawPadd(pcX, pcY, paddW, paddH, paddHit);
   
   }//End draw
   
-  function drawBall() {
+  function drawBall(ballhit) {
     ctx.beginPath();
     ctx.arc(x, y, ballRad, 0 * Math.PI, 2 * Math.PI);
     ctx.fillStyle = "#000";
@@ -90,7 +93,7 @@ function run() {
     ctx.closePath();
   }
   
-  function drawPadd(paddX, paddY, paddW, paddH) {
+  function drawPadd(paddX, paddY, paddW, paddH, paddHit) {
     ctx.beginPath();
     ctx.rect(paddX, paddY, paddW, paddH);
     ctx.fillStyle = "#000";
