@@ -21,7 +21,17 @@ function run() {
   
   //Canvas redraw
   let time = 10;
-  let canvasDraw = setInterval(draw, time);  
+  let canvasDraw = setInterval(draw, time);
+  
+  //User paddle  
+  let paddW = 10;
+  let paddH = 50;
+  let userX = 0;
+  let userY = (canvas.height / 2) - (paddH / 2);
+  
+  //PC padde  
+  let pcX = canvas.width - paddW;
+  let pcY = userY;
   
   function draw() {
     
@@ -45,12 +55,22 @@ function run() {
     
     //Draw objects
     drawBall();
+    drawPadd(userX, userY, paddW, paddH);
+    drawPadd(pcX, pcY, paddW, paddH);
   
   }//End draw
   
   function drawBall() {
     ctx.beginPath();
     ctx.arc(x, y, ballRad, 0 * Math.PI, 2 * Math.PI);
+    ctx.fillStyle = "#000";
+    ctx.fill();
+    ctx.closePath();
+  }
+  
+  function drawPadd(paddX, paddY, paddW, paddH) {
+    ctx.beginPath();
+    ctx.rect(paddX, paddY, paddW, paddH);
     ctx.fillStyle = "#000";
     ctx.fill();
     ctx.closePath();
