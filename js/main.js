@@ -30,6 +30,10 @@ function run() {
   let pcX = canvas.width - paddW;
   let pcY = userY;
   
+  //Paddle movement controls init
+  let upKey = false;
+  let downKey = false;
+  
   //Listeners
   document.addEventListener("keydown", keyDownFn, false);
   document.addEventListener("keyup", keyUpFn, false);
@@ -43,8 +47,7 @@ function run() {
     //Clear Canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    //Move ball - ball limits
-    
+    //Move ball - ball limits    
     x += dx;
     y += dy;
     
@@ -56,6 +59,14 @@ function run() {
     }
     else if (y + dy > canvas.height - ballRad) {
       dy = -dy;
+    }
+    
+    //User Paddle movement
+    if (upKey) {
+      userY -= 7;
+    }
+    else if (downKey) {
+      userY += 7;
     }
     
     //Draw objects
