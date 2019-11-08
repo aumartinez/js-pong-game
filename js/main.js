@@ -28,6 +28,21 @@ function run() {
     //Clear Canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
+    //Move ball - ball limits
+    
+    x += dx;
+    y += dy;
+    
+    if (x + dx > canvas.width - ballRad || x + dx < ballRad) {
+      dx = -dx;
+    }
+    if (y + dy < ballRad) {
+      dy = -dy;
+    }
+    else if (y + dy > canvas.height - ballRad) {
+      dy = -dy;
+    }
+    
     //Draw objects
     drawBall();
   
