@@ -96,4 +96,19 @@ function run() {
     }
   }
   
+  function keyUpFn(evt) {
+    switch (evt.keyCode) {
+      case 38: //up arrow
+      upKey = false;
+      break;
+      
+      case 40: //down arrow
+      downKey = false;
+      break;
+      
+      default:
+      return false;
+    }
+  }
+  
 } //End run
