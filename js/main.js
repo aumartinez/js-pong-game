@@ -17,7 +17,6 @@ function run() {
   let dx = 3;
   let dy = 3;
   
-  let movX = 5;
   let movY = 5;
   
   //Ball
@@ -36,6 +35,8 @@ function run() {
   //PC paddle  
   let pcX = canvas.width - paddW;
   let pcY = userY;
+  
+  let pcSpeed = 2;
   
   //Paddle movement controls init
   let upKey = false;
@@ -58,13 +59,12 @@ function run() {
     x += dx;
     y += dy;
     
-    /*if (x + dx > canvas.width + ballRad) {
-      x = dx;
+    if (x + dx > canvas.width + ballRad) {
+      x = 0;
       y = initY;      
-    }*/
-    
+    }    
     if (x + dx < 0 - ballRad) {
-      x = canvas.width - ballRad;
+      x = canvas.width;
       y = initY;      
     }
     
@@ -81,15 +81,15 @@ function run() {
       userY -= movY;
     }
     else if (downKey && userY < (canvas.height - paddH)) {
-      userY += movX;
+      userY += movY;
     }
     
     //PC paddle movement
     if (dy < 0 && pcY > 0) {
-      pcY -= 3;
+      pcY -= pcSpeed;
     }
     else if (dy > 0 && pcY < (canvas.height - paddH)) {
-      pcY += 3;
+      pcY += pcSpeed;
     }
     
     //Draw objects
