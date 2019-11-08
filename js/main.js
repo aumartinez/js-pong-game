@@ -7,8 +7,11 @@ function run() {
   let ctx = canvas.getContext("2d");
   
   //Start position  
-  let x = canvas.width / 2;
-  let y = canvas.height / 2;
+  let initX = canvas.width / 2;
+  let initY = canvas.height / 2;
+  
+  let x = initX;
+  let y = initY;
   
   //Displacement  
   let dx = 3;
@@ -55,9 +58,17 @@ function run() {
     x += dx;
     y += dy;
     
-    if (x + dx > canvas.width - ballRad || x + dx < ballRad) {
-      dx = -dx;
+    /*if (x + dx > canvas.width + ballRad) {
+      x = dx;
+      y = initY;      
+    }*/
+    
+    if (x + dx < 0 - ballRad) {
+      x = canvas.width - ballRad;
+      y = initY;      
     }
+    
+    //Top and bottom bounces
     if (y + dy < ballRad) {
       dy = -dy;
     }
@@ -75,17 +86,18 @@ function run() {
     
     //PC paddle movement
     if (dy < 0 && pcY > 0) {
-      pcY -= 2;
+      pcY -= 3;
     }
     else if (dy > 0 && pcY < (canvas.height - paddH)) {
-      pcY += 2;
+      pcY += 3;
     }
     
     //Draw objects
     drawBall(ballHit);
     drawPadd(userX, userY, paddW, paddH, paddHit);
     drawPadd(pcX, pcY, paddW, paddH, paddHit);
-    collDetection(x, y, userX, userY);
+    collDetection(x, y, userX, userY, 0);
+    collDetection(x, y, pcX, pcY, canvas.width);
   
   }//End draw
   
@@ -135,21 +147,15 @@ function run() {
     }
   }
   
-  function collDetection(ballX, ballY, paddX, paddY) {
-        
+  function collDetection(ballX, ballY, paddX, paddY, limitX) {
     let limitTop = paddY;
-    let limitBott = paddY + paddH;
-    let limitX = paddW;
+    let limitBott = paddY + paddH;    
   
-    if (ballX < limitX) {
+    if (ballX == limitX) {
       if (ballY > limitTop && ballY < limitBott) {
-        dx = +dx;
+        dx = -dx;
       }
-    }
-    else {
-      dx = -dx;
-    }
-    
+    }    
     return;
   }
   
