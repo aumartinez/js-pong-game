@@ -6,15 +6,13 @@ function run() {
   let canvas = document.getElementById("myCanvas");
   let ctx = canvas.getContext("2d");
   
-  //Start position
-  
+  //Start position  
   let x = canvas.width / 2;
   let y = canvas.height / 2;
   
-  //Displacement
-  
-  let dx = 2;
-  let dy = 2;
+  //Displacement  
+  let dx = 3;
+  let dy = 3;
   
   //Ball
   let ballRad = 8;
@@ -62,11 +60,19 @@ function run() {
     }
     
     //User Paddle movement
-    if (upKey) {
-      userY -= 7;
+    if (upKey && userY > 0) {
+      userY -= 5;
     }
-    else if (downKey) {
-      userY += 7;
+    else if (downKey && userY < (canvas.height - paddH)) {
+      userY += 5;
+    }
+    
+    //PC paddle movement
+    if (dy < 0 && pcY > 0) {
+      pcY -= 2;
+    }
+    else if (dy > 0 && pcY < (canvas.height - paddH)) {
+      pcY += 2;
     }
     
     //Draw objects
