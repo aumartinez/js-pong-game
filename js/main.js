@@ -14,6 +14,9 @@ function run() {
   let dx = 3;
   let dy = 3;
   
+  let movX = 5;
+  let movY = 5;
+  
   //Ball
   let ballRad = 8;
   let ballHit = false;
@@ -63,11 +66,11 @@ function run() {
     }
     
     //User Paddle movement
-    if (upKey && userY > 0) {
-      userY -= 5;
+    if (upKey && (userY) > 0) {
+      userY -= movY;
     }
     else if (downKey && userY < (canvas.height - paddH)) {
-      userY += 5;
+      userY += movX;
     }
     
     //PC paddle movement
@@ -82,10 +85,11 @@ function run() {
     drawBall(ballHit);
     drawPadd(userX, userY, paddW, paddH, paddHit);
     drawPadd(pcX, pcY, paddW, paddH, paddHit);
+    collDetection(x, y, userX, userY);
   
   }//End draw
   
-  function drawBall(ballhit) {
+  function drawBall(ballHit) {
     ctx.beginPath();
     ctx.arc(x, y, ballRad, 0 * Math.PI, 2 * Math.PI);
     ctx.fillStyle = "#000";
@@ -129,6 +133,24 @@ function run() {
       default:
       return false;
     }
+  }
+  
+  function collDetection(ballX, ballY, paddX, paddY) {
+        
+    let limitTop = paddY;
+    let limitBott = paddY + paddH;
+    let limitX = paddW;
+  
+    if (ballX < limitX) {
+      if (ballY > limitTop && ballY < limitBott) {
+        dx = +dx;
+      }
+    }
+    else {
+      dx = -dx;
+    }
+    
+    return;
   }
   
 } //End run
