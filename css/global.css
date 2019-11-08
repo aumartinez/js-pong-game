@@ -1,3 +1,6 @@
+/* CSS */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
 html, body{
   padding: 0;
   margin: 0;
@@ -16,7 +19,7 @@ body {
 .wrapper {
   padding: 0 15px;
   max-width: 660px;
-  margin: 0 auto;
+  margin: 60px auto;
 }
 
 #myCanvas { 
