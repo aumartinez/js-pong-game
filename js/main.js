@@ -6,18 +6,16 @@ function run() {
   let canvas = document.getElementById("myCanvas");
   let ctx = canvas.getContext("2d");
   
-  //Start position  
+  //Ball Start position  
   let initX = canvas.width / 2;
   let initY = canvas.height / 2;
   
   let x = initX;
   let y = initY;
   
-  //Displacement  
+  //Ball Displacement  
   let dx = 3;
-  let dy = 3;
-  
-  let movY = 5;
+  let dy = dx;
   
   //Ball
   let ballRad = 8;
@@ -28,6 +26,8 @@ function run() {
   let paddH = 50;
   
   let paddHit = false;
+  
+  let movY = 5;
   
   let userX = 0;
   let userY = (canvas.height / 2) - (paddH / 2);
