@@ -17,6 +17,8 @@ function run() {
   let dx = 3;
   let dy = dx;
   
+  let gameTime = 0;
+  
   //Ball
   let ballRad = 8;
   let ballHit = false;
@@ -63,13 +65,25 @@ function run() {
     x += dx;
     y += dy;
     
-    if (x + dx > canvas.width + ballRad) {
-      x = 0;
-      y = initY;      
+    if (x > canvas.width) {
+      x = 0 + 15;
+      y = initY;
+      userScore++;
+      if(userScore == 10) {        
+        clearInterval(canvasDraw);
+        alert("You Win");
+        document.location.reload();
+      }
     }    
-    if (x + dx < 0 - ballRad) {
-      x = canvas.width;
-      y = initY;      
+    if (x < 0) {
+      x = canvas.width - 15;
+      y = initY;
+      pcScore++;
+      if(pcScore == 10) {        
+        clearInterval(canvasDraw);
+        alert("You Loose");
+        document.location.reload();
+      }
     }
     
     //Top and bottom bounces
@@ -102,15 +116,17 @@ function run() {
     drawPadd(pcX, pcY, paddW, paddH, paddHit);
     drawUserScore();
     drawPcScore();
-    collDetection(x, y, userX, userY, 0);
-    collDetection(x, y, pcX, pcY, canvas.width);    
+    drawLabel();
+    collDetection(x, y, userX, userY);
+    collDetection(x, y, pcX, pcY);    
   
   }//End draw
   
   function drawBall(ballHit) {
     ctx.beginPath();
     ctx.arc(x, y, ballRad, 0 * Math.PI, 2 * Math.PI);
-    ctx.fillStyle = "#000";
+    let ballColor = (ballHit)? "red" : "#000";    
+    ctx.fillStyle = ballColor;
     ctx.fill();
     ctx.closePath();
   }
@@ -118,7 +134,8 @@ function run() {
   function drawPadd(paddX, paddY, paddW, paddH, paddHit) {
     ctx.beginPath();
     ctx.rect(paddX, paddY, paddW, paddH);
-    ctx.fillStyle = "#000";
+    let paddColor = (paddHit)? "#555" : "#000";
+    ctx.fillStyle = paddColor;
     ctx.fill();
     ctx.closePath();
   }
@@ -131,8 +148,15 @@ function run() {
   
   function drawPcScore() {
     ctx.font = "40px Quantico";
-    ctx.fillStyle = "#555";
-    ctx.fillText(pcScore, canvas.width - 75, 45);
+    ctx.fillStyle = "#555";    
+    ctx.fillText(pcScore, canvas.width - 45, 45);
+  }
+  
+  function drawLabel() {
+    ctx.font = "40px Quantico";
+    ctx.fillStyle = "#000";
+    ctx.textAlign = "center";
+    ctx.fillText("Best of 10", canvas.width/2, 45);
   }
   
   function keyDownFn(evt) {
@@ -165,15 +189,24 @@ function run() {
     }
   }
   
-  function collDetection(ballX, ballY, paddX, paddY, limitX) {
+  function collDetection(ballX, ballY, paddX, paddY) {
     let limitTop = paddY;
-    let limitBott = paddY + paddH;    
-  
-    if (ballX == limitX) {
-      if (ballY > limitTop && ballY < limitBott) {
+    let limitBott = paddY + paddH;
+    let limitRight = paddX;
+    let limitLeft = paddX + paddW;
+    
+    if(ballX < limitLeft && ballX > limitRight) {
+      if(ballY < limitBott && ballY > limitTop) {
         dx = -dx;
-      }
-    }    
+        ballHit = true;
+        paddHit = true;
+      }  
+    }
+    else {
+      ballHit = false;
+      paddHit = false;
+    }
+    
     return;
   }
   
