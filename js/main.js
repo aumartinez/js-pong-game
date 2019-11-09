@@ -17,8 +17,6 @@ function run() {
   let dx = 3;
   let dy = dx;
   
-  let gameTime = 0;
-  
   //Ball
   let ballRad = 8;
   let ballHit = false;
