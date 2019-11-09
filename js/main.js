@@ -56,8 +56,7 @@ function run() {
   let time = 10;
   let canvasDraw = setInterval(draw, time);
   
-  function draw() {
-    
+  function draw() {    
     //Clear Canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
