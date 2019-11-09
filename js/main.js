@@ -38,6 +38,10 @@ function run() {
   
   let pcSpeed = 2;
   
+  //Scores
+  let userScore = 0;
+  let pcScore = 0;
+  
   //Paddle movement controls init
   let upKey = false;
   let downKey = false;
@@ -96,8 +100,10 @@ function run() {
     drawBall(ballHit);
     drawPadd(userX, userY, paddW, paddH, paddHit);
     drawPadd(pcX, pcY, paddW, paddH, paddHit);
+    drawUserScore();
+    drawPcScore();
     collDetection(x, y, userX, userY, 0);
-    collDetection(x, y, pcX, pcY, canvas.width);
+    collDetection(x, y, pcX, pcY, canvas.width);    
   
   }//End draw
   
@@ -115,6 +121,18 @@ function run() {
     ctx.fillStyle = "#000";
     ctx.fill();
     ctx.closePath();
+  }
+  
+  function drawUserScore(){
+    ctx.font = "40px Quantico";
+    ctx.fillStyle = "#555";
+    ctx.fillText(userScore, 45, 45);
+  }
+  
+  function drawPcScore() {
+    ctx.font = "40px Quantico";
+    ctx.fillStyle = "#555";
+    ctx.fillText(pcScore, canvas.width - 75, 45);
   }
   
   function keyDownFn(evt) {
