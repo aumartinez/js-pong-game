@@ -71,7 +71,7 @@ function run() {
       userScore++;
       if(userScore == 10) {        
         clearInterval(canvasDraw);
-        alert("You Win");
+        alert("You Wont");
         document.location.reload();
       }
     }    
@@ -81,7 +81,7 @@ function run() {
       pcScore++;
       if(pcScore == 10) {        
         clearInterval(canvasDraw);
-        alert("You Loose");
+        alert("You Lost");
         document.location.reload();
       }
     }
