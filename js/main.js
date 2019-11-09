@@ -70,7 +70,7 @@ function run() {
       userScore++;
       if(userScore == 10) {        
         clearInterval(canvasDraw);
-        alert("You Wont");
+        alert("You Won");
         document.location.reload();
       }
     }    
